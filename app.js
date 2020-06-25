@@ -32,7 +32,7 @@ db.find({}, function (err, result) {
  if (err) {
   console.log(err);
  } else {
-  for (let i = 0; i < result.length; i++) }
+  for (let i = 0; i < result.length; i++) {
     let track = result[i];
     request.get(track.URL).then(res => {
       console.log(`[INFO] REQUEST FOR ${track.URL}`);
