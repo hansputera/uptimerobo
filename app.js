@@ -27,6 +27,21 @@ const dbSchema = new mongoose.Schema({
 
 const db = mongoose.model('uptime', dbSchema);
 
+
+db.find({}, function (err, result) {
+ if (err) {
+  console.log(err);
+ } else {
+  for (let i = 0; i < result.length; i++) }
+    let track = result[i];
+    request.get(track.URL).then(res => {
+
+    });
+  }
+ }
+});
+
+
 app.get('/', async (req,res) => {
  res.render('index.ejs', { req });
 });
