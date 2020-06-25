@@ -8,11 +8,16 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Pangolin&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@700&display=swap" rel="stylesheet">
+   
     <!-- Custom CSS -->
     <style>
     #title {
      font-family: 'Pangolin', cursive;
+    }
+
+    .footer p {
+      font-family: 'Balsamiq Sans', cursive;
     }
 
     .add {
@@ -31,9 +36,28 @@
 
  
   <section class="add text-center">
-  
+  <h1> # Add your Domain </h1>
+  <hr style="border-top: 3px solid black; width=300px" />
+  <form method=post action=/submit>
+  <div class="form-group">
+    <label for="domain">Email address</label>
+    <input type="text" class="form-control" id="domain" aria-describedby="domHelp" placeholder="Enter your application url" required>
+    <small id="domHelp" class="form-text text-muted">We'll save your domain application. Include https or http!</small>
+  </div>
+  <div class="form-group">
+    <label for="ip">Your IP</label>
+    <input type="text" class="form-control" id="ip" aria-describedby="ipH" value="<%= req.ip %>" readonly>
+    <small id="ipH" class "form-text text-muted">We'll never save your ip and share to anyone else.</small>
+  </div>
+  <button type="submit" class="btn btn-primary">Add</button>
+</form>
+
   </section>
 
+ <footer class="text-center">
+   <hr style="width: 250px;border-top: 3px solid black">
+  <p> © Created by <strong> Hanif Dwy Putra S. </strong> with ♥<br>Join to our <a href="https://discord.gg/EepS3Q9">discord</a> server's</p>
+ </footer>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
