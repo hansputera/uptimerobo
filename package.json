@@ -1,0 +1,13 @@
+{
+ "name": "up",
+ "version": "0.0.1",
+ "description": "y",
+ "scripts": { "start": "node app.js" },
+ "engines": { "node": "12.x" },
+ "dependencies": { 
+  "express": "*",
+  "node-superfetch": "*",
+  "body-parser": "*",
+  "ejs": "*"
+ }
+}
