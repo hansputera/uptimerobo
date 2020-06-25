@@ -47,6 +47,16 @@ app.get('/', async (req,res) => {
  res.render('index.ejs', { req });
 });
 
+app.get('/error', async (req, res) => {
+
+let t = req.query.t;
+
+if (!t) return res.redirect('/');
+
+res.json({ error: t });
+
+});
+
 app.post('/submit', async (req,res) => {
 try {
  let url = req.body.url;
@@ -76,7 +86,7 @@ try {
  })
  }
  }catch(e) {
-  res.json({ error: e.message });
+  res.redirect(`/error?t=${escape(e.message)}`);
  }
 });
 
