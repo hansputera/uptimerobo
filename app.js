@@ -27,7 +27,7 @@ const dbSchema = new mongoose.Schema({
 
 const db = mongoose.model('uptime', dbSchema);
 
-
+setInterval(() => {
 db.find({}, function (err, result) {
  if (err) {
   console.log(err);
@@ -35,23 +35,29 @@ db.find({}, function (err, result) {
   for (let i = 0; i < result.length; i++) }
     let track = result[i];
     request.get(track.URL).then(res => {
-
+      console.log(`[INFO] REQUEST FOR ${track.URL}`);
     });
   }
  }
 });
 
+}, 10 * 1000);
 
 app.get('/', async (req,res) => {
  res.render('index.ejs', { req });
 });
 
 app.post('/submit', async (req,res) => {
+try {
  let url = req.body.url;
 
  let vld = valid({ strict: true }).test(url);
 
  if (!vld) return res.redirect('/error?t=' + encodeURI('Your URL is not valid!'));
+ 
+ let { status } = await request.get(url);
+
+ if (status === 200) {
  
  await db.findOne({ URL: url.toLowerCase() }, async (err, result) => {
    if (err) {
@@ -67,7 +73,11 @@ app.post('/submit', async (req,res) => {
      setTimeout(() => { res.redirect('/'); }, 5000);
    });
   }
- });
+ })
+ }
+ }catch(e) {
+  res.json({ error: e.message });
+ }
 });
 
 
