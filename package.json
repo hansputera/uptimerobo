@@ -8,6 +8,8 @@
   "express": "*",
   "node-superfetch": "*",
   "body-parser": "*",
-  "ejs": "*"
+  "ejs": "*",
+  "mongoose": "*",
+  "url-regex": "*"
  }
 }
