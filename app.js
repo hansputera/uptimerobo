@@ -24,7 +24,8 @@ mongoose.connect('mongodb+srv://anak:sapi@cluster0-dwjqm.mongodb.net/urls?retryW
 });
 
 const dbSchema = new mongoose.Schema({
- URL: String
+ URL: String,
+ PWD: String
 });
 
 const db = mongoose.model('uptime', dbSchema);
@@ -77,6 +78,8 @@ res.json({ error: t });
 app.post('/submit', async (req,res) => {
 try {
  let url = req.body.url;
+ let pwd = req.body.pwd;
+ 
 
  let domain = valid({ strict: true, exact: true }).test(url);
 
@@ -92,9 +95,9 @@ try {
      //res.end(err);
    }
    if (result) {
-   return res.send(`Thank you for using our uptime!<br>We detect <strong>${url}</strong> is available!<br>Please go <a href="/">back</a>`); //&& res.end('Stop');
+   return console.log(result) && res.send(`Thank you for using our uptime!<br>We detect <strong>${url}</strong> is available!<br>Please go <a href="/">back</a>`); //&& res.end('Stop');
   }
-   let data = await db({ URL: url.toLowerCase() });
+   let data = await db({ URL: url.toLowerCase(), PWD: pwd });
 
    data.save().then(error => {
      res.json({ success: true, message: "Your data has saving. Now your domain is online for 24/7!" });
