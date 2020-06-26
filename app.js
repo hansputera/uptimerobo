@@ -5,7 +5,13 @@ const session = require('express-session');
 const passport = require('passport');
 const Strategy = require('passport-google-oauth2').Strategy;
 
-
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+ 
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
 
 const request = require('node-superfetch');
 
@@ -69,13 +75,14 @@ passport.use(new Strategy({
 
 
 passport.use(session({
-secret:'lmao',
-resave: false,
-saveUninitialized: false
+secret:'keyboard cat',
+resave: true,
+saveUninitialized: true
 }));
 
-app.use(passport.session());
 app.use(passport.initialize());
+
+app.use(passport.session());
 
 
 app.get('/auth/google',
