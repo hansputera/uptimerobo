@@ -16,12 +16,8 @@
      font-family: 'Pangolin', cursive;
     }
 
-    .footer p {
+    h1, h2 {
       font-family: 'Balsamiq Sans', cursive;
-    }
-
-    .add {
-     background: grey;
     }
     </style>
     <title>Uptime Robot | Home</title>
@@ -29,26 +25,24 @@
   <body>
     
   <div class="jumbotron text-center">
-   <img class="rounded-circle" src="https://i.ibb.co/MgJYdvX/uptime-robot.png" />
+   <img class="rounded-circle" src="https://i.ibb.co/MgJYdvX/uptime-robot.png" width=250px />
    <h1> Free Uptime Robot </h1>
    <p id="title"> Maybe this uptime will helpful for you? </p>
   </div>
 
  
-  <section class="add text-center">
-  <h1> # Add your Domain </h1>
+  <section class="about text-center">
+  <h2> # Add your Domain </h2>
   <hr style="border-top: 3px solid black; width=300px" />
   <form method=post action=/submit>
   <div class="form-group">
-    <label for="domain">Email address</label>
+    <label for="domain">Domain</label>
     <input type="text" class="form-control" id="domain" aria-describedby="domHelp" placeholder="Enter your application url" required>
-    <small id="domHelp" class="form-text text-muted">We'll save your domain application. Include https or http!</small>
-  </div>
+    </div>
   <div class="form-group">
     <label for="ip">Your IP</label>
     <input type="text" class="form-control" id="ip" aria-describedby="ipH" value="<%= req.ip %>" readonly>
-    <small id="ipH" class "form-text text-muted">We'll never save your ip and share to anyone else.</small>
-  </div>
+    </div>
   <button type="submit" class="btn btn-primary">Add</button>
 </form>
 
