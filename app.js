@@ -15,28 +15,6 @@ done(null, user);
 });
 
 
-passport.use(new Strategy({
-    clientID: '396106065900-i47son68ud1rvquc8qqgb2dmenmhlh1m.apps.googleusercontent.com',
-    clientSecret: 'cUxAxT1TyL3wqvhyQcOHI9Fd',
-    callbackURL: "https://uptimeribod.herokuapp.com/auth/google/callback",
-    passReqToCallback   : true
-  },
-  function(request, accessToken, refreshToken, profile, done) {
-    process.nextTick(function() {
-     done(null, profile);
-   })
-}));
-
-passport.use(session({
-secret:'lmao',
-resave: false,
-saveUninitialized: false
-}));
-
-app.use(passport.session());
-app.use(passport.initialize());
-
-
 
 
 const request = require('node-superfetch');
@@ -85,6 +63,31 @@ db.find({}, function (err, result) {
 }, 10 * 1000);
 
 
+
+
+passport.use(new Strategy({
+    clientID: '396106065900-i47son68ud1rvquc8qqgb2dmenmhlh1m.apps.googleusercontent.com',
+    clientSecret: 'cUxAxT1TyL3wqvhyQcOHI9Fd',
+    callbackURL: "https://uptimeribod.herokuapp.com/auth/google/callback",
+    passReqToCallback   : true
+  },
+  function(request, accessToken, refreshToken, profile, done) {
+    process.nextTick(function() {
+     done(null, profile);
+   })
+}));
+
+passport.use(session({
+secret:'lmao',
+resave: false,
+saveUninitialized: false
+}));
+
+app.use(passport.session());
+app.use(passport.initialize());
+
+
+
 app.get('/auth/google',
   passport.authenticate('google', { scope: 
       [ 'https://www.googleapis.com/auth/plus.login',
@@ -99,12 +102,11 @@ app.get('/auth/google/callback',
 
 
 
-app.get('/', async (req,res) => {
+app.get('/', async (req,res, next) => {
  db.find({}, (err, result) => {
  res.render('index.ejs', { req, result});
-
+ next();
  })
-// res.end('Ended');
 });
 
 
