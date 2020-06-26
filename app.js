@@ -15,7 +15,7 @@ done(null, user);
 });
 
 
-passport.use(new GoogleStrategy({
+passport.use(new Strategy({
     clientID: '396106065900-i47son68ud1rvquc8qqgb2dmenmhlh1m.apps.googleusercontent.com',
     clientSecret: 'cUxAxT1TyL3wqvhyQcOHI9Fd',
     callbackURL: "https://uptimeribod.herokuapp.com/auth/google/callback",
