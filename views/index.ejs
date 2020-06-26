@@ -24,6 +24,10 @@
     width: 250px;
     border-top: 3px solid black;
     }
+
+    input {
+     font-color: white;
+    }
     </style>
     <title>Uptime Robot | Home</title>
   </head>
@@ -46,7 +50,8 @@
     </div>
   <div class="form-group text-center">
    <label for="password">Password</label>
-   <input type="password" class"="form-control" id="pwd" placeholder="Enter your password" name="pwd" required>
+   <input type="password" class="form-control" id="pwd" placeholder="Enter your password" name="pwd" maxlength=8 required>
+   <input type="checkbox" onclick="showPass()">Show
   </div>
   <div class="form-group text-center">
     <label for="ip">Your IP</label>
@@ -61,6 +66,19 @@
    <hr style="width: 250px;border-top: 3px solid black">
   <p> © Created by <strong> Hanif Dwy Putra S. </strong> with ♥<br>Join to our <a href="https://discord.gg/EepS3Q9">discord</a> server's</p>
  </footer>
+
+    <!-- Custom JS -->
+
+    <script>
+    function showPass() {
+     let x = document.getElementById('pwd');
+     if (x.type === 'password') {
+      x.type = 'text';
+     } else {
+      x.type = 'password';
+     }
+    }
+    </script>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
