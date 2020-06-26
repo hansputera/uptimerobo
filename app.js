@@ -77,14 +77,13 @@ try {
    }
    if (res) {
    return res.send(`Thank you for using our uptime!<br>We detect <strong>${url}</strong> is available!<br>Please go <a href="/">back</a>`);
-  } else {
+  }
    let data = await db({ URL: url.toLowerCase() });
 
    data.save().then(error => {
      res.json({ success: true, message: "Your data has saving. Now your domain is online for 24/7!" });
      setTimeout(() => { res.redirect('/'); }, 5000);
    });
-  }
  })
  }
  }catch(e) {
