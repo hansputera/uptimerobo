@@ -87,7 +87,7 @@ try {
    if (err) {
      res.send(`Sorry, you've been stopped, because: ${err}`);
    }
-   if (res) {
+   if (result) {
    return res.send(`Thank you for using our uptime!<br>We detect <strong>${url}</strong> is available!<br>Please go <a href="/">back</a>`);
   }
    let data = await db({ URL: url.toLowerCase() });
