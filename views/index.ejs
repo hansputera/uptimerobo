@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="og:title" content="Hello Guest!">
-    <meta name="og:description" content="We're uptime will save your apps to be online for 24/7. You must be have one requirements, your homepage url status must be http status 200 code. <%= result.length %> has registered here.">
+    <meta name="og:description" content="We're uptime will save your apps to be online for 24/7. You must be have one requirements, your homepage url status must be http status 200 code. <%= result.length %> websites has registered here.">
     <meta name="theme-color" content="#FFFFFFF">
     <meta name="author" content="Hanif">
     <meta name="keywords" content="uptimerobot, uptime, uptimerobo, uptimerobo 24/7, apps uptime, app uptime, applications uptime, application uptime">
@@ -30,8 +30,12 @@
     border-top: 3px solid black;
     }
 
-    input {
+    input[value] {
      font-color: white;
+    }
+
+    input[type=checkbox]:checked {
+      content: '(Showing)';
     }
     </style>
     <title>Uptime Robot | Home</title>
@@ -50,7 +54,7 @@
  
   <section class="about text-center">
   <h2> # Add your Domain </h2>
-  <div class="container pt-3 mr-5">
+  <div class="container pt-3 mr-3">
   <hr />
   <form method=post action=/submit>
   <div class="form-group text-center">
