@@ -47,6 +47,8 @@ db.find({}, function (err, result) {
 
 app.get('/', async (req,res) => {
  res.render('index.ejs', { req });
+
+// res.end('Ended');
 });
 
 
@@ -57,6 +59,7 @@ app.get('/list_dom', (req,res) => {
   }
 
  res.json(result);
+// res.end(result);
 })
 });
 
@@ -86,15 +89,15 @@ try {
  await db.findOne({ URL: url.toLowerCase() }, async (err, result) => {
    if (err) {
      res.send(`Sorry, you've been stopped, because: ${err}`);
+     //res.end(err);
    }
    if (result) {
-   return res.send(`Thank you for using our uptime!<br>We detect <strong>${url}</strong> is available!<br>Please go <a href="/">back</a>`);
+   return res.send(`Thank you for using our uptime!<br>We detect <strong>${url}</strong> is available!<br>Please go <a href="/">back</a>`); //&& res.end('Stop');
   }
    let data = await db({ URL: url.toLowerCase() });
 
    data.save().then(error => {
      res.json({ success: true, message: "Your data has saving. Now your domain is online for 24/7!" });
-     setTimeout(() => { res.redirect('/'); }, 5000);
    });
  })
  }
