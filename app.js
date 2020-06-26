@@ -47,8 +47,10 @@ db.find({}, function (err, result) {
 }, 10 * 1000);
 
 app.get('/', async (req,res) => {
- res.render('index.ejs', { req });
+ db.find({}, (err, result) => {
+ res.render('index.ejs', { req, result});
 
+ })
 // res.end('Ended');
 });
 
@@ -95,7 +97,7 @@ try {
      //res.end(err);
    }
    if (result) {
-   return console.log(result) && res.send(`Thank you for using our uptime!<br>We detect <strong>${url}</strong> is available!<br>Please go <a href="/">back</a>`); //&& res.end('Stop');
+   return res.send(`Thank you for using our uptime!<br>We detect <strong>${url}</strong> is available!<br>Please go <a href="/">back</a>`); //&& res.end('Stop');
   }
    let data = await db({ URL: url.toLowerCase(), PWD: pwd });
 
