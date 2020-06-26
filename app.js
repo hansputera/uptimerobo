@@ -6,16 +6,6 @@ const passport = require('passport');
 const Strategy = require('passport-google-oauth2').Strategy;
 
 
-passport.deserializeUser(function(obj, done) {
-done(null, obj);
-});
-
-passport.serializeUser(function(user, done) {
-done(null, user);
-});
-
-
-
 
 const request = require('node-superfetch');
 
@@ -76,7 +66,7 @@ passport.use(new Strategy({
      done(null, profile);
    })
 }));
-
+/*
 passport.use(session({
 secret:'lmao',
 resave: false,
@@ -86,7 +76,7 @@ saveUninitialized: false
 app.use(passport.session());
 app.use(passport.initialize());
 
-
+*/
 
 app.get('/auth/google',
   passport.authenticate('google', { scope: 
