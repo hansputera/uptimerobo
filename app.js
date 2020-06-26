@@ -61,7 +61,7 @@ app.post('/submit', async (req,res) => {
 try {
  let url = req.body.url;
 
- let vld = valid({ strict: true, exact: true }).test(url);
+ let vld = valid({ exact: true }).test(url);
 
  if (!vld) return res.redirect('/error?t=' + encodeURI('Your URL is not valid!'));
  
