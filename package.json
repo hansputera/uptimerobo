@@ -10,6 +10,9 @@
   "body-parser": "*",
   "ejs": "*",
   "mongoose": "*",
-  "url-regex": "*"
+  "url-regex": "*",
+  "passport": "*",
+  "express-session": "*",
+  "passport-google-oauth2": "*"
  }
 }
