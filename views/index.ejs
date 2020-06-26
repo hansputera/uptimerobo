@@ -67,7 +67,7 @@
     <input type="text" class="form-control" id="ip" aria-describedby="ipH" value="<%= req.ip %>" readonly>
     </div>
   <div class="form-group">
-  <input type="checkbox" id="verified" value="Verified">&copy; You've agree with our TOS and service and your data'll safe here.
+  <input type="checkbox" id="verified" value="Verified"><strong>You've agree with our TOS and service and your data'll safe here.</strong>
   </div>
   <button type="submit" class="btn btn-primary" disabled>Add</button>
 </form>
@@ -107,13 +107,21 @@
      callback: callback
    });
 
-    $('#verified').click(function() {
-      if ($('#verified').checked) {
-         $('button').attr('disabled', false);
-       } else {
-        $('button').removeAttr('disabled');
+
+    setInterval(() => {
+     let checkav = $('#verified');
+     if (checkav.data('clicked')) {
+       let x = { b: $('button'), v: $('#verified') };
+       if (x.v.checked) {
+        x.b.removeAttr('disabled');
+      } else {
+        x.b.attr('disabled', true);
       }
-    });
+     } else {
+      let bt = $('button');
+      $('button') = bt;
+     }
+    }, 1);
 
     function showPass() {
      let x = document.getElementById('pwd');
