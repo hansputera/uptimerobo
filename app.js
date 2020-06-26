@@ -80,7 +80,7 @@ resave: true,
 saveUninitialized: true
 }));
 
-app.use(passport.session());
+app.use(passport.initialize());
 
 app.get('/', async (req,res, next) => {
  db.find({}, (err, result) => {
