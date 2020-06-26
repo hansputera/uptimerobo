@@ -49,6 +49,18 @@ app.get('/', async (req,res) => {
  res.render('index.ejs', { req });
 });
 
+
+app.get('/list_dom', (req,res) => {
+ db.find({}, (err, result) => {
+  if (err) {
+   res.json({ error: err });
+  }
+
+ res.json(result);
+})
+});
+
+
 app.get('/error', async (req, res) => {
 
 let t = req.query.t;
