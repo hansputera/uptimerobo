@@ -85,20 +85,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-app.get('/auth/google',
-  passport.authenticate('google', { scope: 
-      [ 'https://www.googleapis.com/auth/plus.login',
-      , 'https://www.googleapis.com/auth/plus.profile.emails.read' ] }
-));
-
-app.get('/auth/google/callback', 
-    passport.authenticate('google', { 
-        successRedirect: '/',
-        failureRedirect: '/auth/google'
-}));
-
-
-
 app.get('/', async (req,res, next) => {
  db.find({}, (err, result) => {
  res.render('index.ejs', { req, result});
@@ -187,6 +173,20 @@ try {
   res.redirect(`/error?t=${escape(e.message)}`);
  }
 });
+
+
+app.get('/auth/google',
+  passport.authenticate('google', { scope: 
+      [ 'https://www.googleapis.com/auth/plus.login',
+      , 'https://www.googleapis.com/auth/plus.profile.emails.read' ] }
+));
+
+app.get('/auth/google/callback', 
+    passport.authenticate('google', { 
+        successRedirect: '/',
+        failureRedirect: '/auth/google'
+}));
+
 
 
 let listener = app.listen(process.env.PORT, function () {
