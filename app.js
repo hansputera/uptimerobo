@@ -80,11 +80,10 @@ res.json({ error: t });
 
 app.get('/removeAll', async (req,res) => {
 
+if (!req.query.pwd || req.query.pwd === '') return res.redirect('/');
 
 db.find({}, async (err, result) => {
 
-
- if (!req.query.pwd || req.query.pwd === '') return res.redirect('/');
 
  let x = result.filter(x => x.PWD === req.query.pwd);
 
