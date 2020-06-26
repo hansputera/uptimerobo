@@ -61,11 +61,10 @@ app.post('/submit', async (req,res) => {
 try {
  let url = req.body.url;
 
- let prt = ['https://', 'http://'];
+ 
+ let vld = valid({ exact: true }).test(url);
 
- let vld = prt.find(x => url.startsWith(x));
-
- if (vld === []) return res.redirect('/error?t=' + encodeURI('Your URL is not valid!'));
+ if (!vld) return res.redirect('/error?t=' + encodeURI('Your URL is not valid!'));
  
  let { status } = await request.get(url);
 
