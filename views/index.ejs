@@ -66,7 +66,7 @@
     <label for="ip">Your IP</label>
     <input type="text" class="form-control" id="ip" aria-describedby="ipH" value="<%= req.ip %>" readonly>
     </div>
-  <div class="form-group">
+  <div class="form-group" id="yolo">
   <input type="checkbox" id="verified" value="Verified"><strong>You've agree with our TOS and service and your data'll safe here.</strong>
   </div>
   <button type="submit" class="btn btn-primary" disabled>Add</button>
@@ -109,9 +109,9 @@
 
     $('#verified').click(function() {
       $('button').removeAttr('disabled');
-  })
-
-    $('#verified').unbind('click', $('button').attr('disabled', true));
+      $('#verified').remove();
+      $("#yolo").append("<strong>✅ You've agree and believe with our TOS and Service available. Have Fun 😉</strong>");
+  });
 
     function showPass() {
      let x = document.getElementById('pwd');
