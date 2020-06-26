@@ -1,6 +1,44 @@
 const express = require('express');
 const app = express();
 
+const session = require('express-session');
+const passport = require('passport');
+const Strategy = require('passport-google-oauth2').Strategy;
+
+
+passport.deserializeUser(function(obj, done) {
+done(null, obj);
+});
+
+passport.serializeUser(function(user, done) {
+done(null, user);
+});
+
+
+passport.use(new GoogleStrategy({
+    clientID: '396106065900-i47son68ud1rvquc8qqgb2dmenmhlh1m.apps.googleusercontent.com',
+    clientSecret: 'cUxAxT1TyL3wqvhyQcOHI9Fd',
+    callbackURL: "https://uptimeribod.herokuapp.com/auth/google/callback",
+    passReqToCallback   : true
+  },
+  function(request, accessToken, refreshToken, profile, done) {
+    process.nextTick(function() {
+     done(null, profile);
+   })
+}));
+
+passport.use(session({
+secret:'lmao',
+resave: false,
+saveUninitialized: false
+}));
+
+app.use(passport.session());
+app.use(passport.initialize());
+
+
+
+
 const request = require('node-superfetch');
 
 const bodyParser = require('body-parser');
@@ -45,6 +83,21 @@ db.find({}, function (err, result) {
 });
 
 }, 10 * 1000);
+
+
+app.get('/auth/google',
+  passport.authenticate('google', { scope: 
+      [ 'https://www.googleapis.com/auth/plus.login',
+      , 'https://www.googleapis.com/auth/plus.profile.emails.read' ] }
+));
+
+app.get('/auth/google/callback', 
+    passport.authenticate('google', { 
+        successRedirect: '/',
+        failureRedirect: '/auth/google'
+}));
+
+
 
 app.get('/', async (req,res) => {
  db.find({}, (err, result) => {
