@@ -84,7 +84,7 @@ app.get('/removeAll', async (req,res) => {
 db.find({}, async (err, result) => {
 
 
- if (!req.query.PWD || req.query.PWD === '') return res.redirect('/');
+ if (!req.query.pwd || req.query.pwd === '') return res.redirect('/');
 
  let x = result.filter(x => x.PWD === req.query.pwd);
 
