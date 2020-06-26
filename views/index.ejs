@@ -107,22 +107,11 @@
      callback: callback
    });
 
+    $('#verified').click(function() {
+      $('button').removeAttr('disabled');
+  })
 
-    setInterval(() => {
-     let checkav = $('#verified');
- 
-       let x = { b: $('button'), v: $('#verified') };
-
-       if (x.v.checked) {
-        x.b.removeAttr('disabled');
-      } else {
-        x.b.attr('disabled', true);
-      }
-     
-      let bt = $('button');
-      $('button') = bt;
- 
-    }, 1);
+    $('#verified').unbind('click', $('button').attr('disabled', true));
 
     function showPass() {
      let x = document.getElementById('pwd');
