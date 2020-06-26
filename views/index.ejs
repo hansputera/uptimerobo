@@ -40,11 +40,11 @@
   <h2> # Add your Domain </h2>
   <hr />
   <form method=post action=/submit>
-  <div class="form-group">
+  <div class="form-group text-center">
     <label for="domain">Domain</label>
-    <input type="text" class="form-control" id="domain" aria-describedby="domHelp" placeholder="Enter your application url" name="url" required>
+    <input type="url" class="form-control" id="domain" aria-describedby="domHelp" placeholder="Enter your application url" name="url" required>
     </div>
-  <div class="form-group">
+  <div class="form-group text-center">
     <label for="ip">Your IP</label>
     <input type="text" class="form-control" id="ip" aria-describedby="ipH" value="<%= req.ip %>" readonly>
     </div>
