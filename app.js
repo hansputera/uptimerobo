@@ -77,6 +77,32 @@ res.json({ error: t });
 
 });
 
+
+app.get('/removeAll', async (req,res) => {
+
+
+db.find({}, async (err, result) => {
+
+
+ if (!req.query.PWD || req.query.PWD === '') return res.redirect('/');
+
+ let x = result.filter(x => x.PWD === req.query.pwd);
+
+ if (x === []) return res.redirect('/');
+
+ for (let i = 0; i < x.length; i++) {
+   let tr = x[i].URL;
+
+
+   db.deleteOne({ URL: tr }, (err, polres) => {
+    res.json({ anjay: 'DATA DARI PASSWORD ' + req.query.PWD + ' TERHAPUS GAN, AWOKAOWWKAOAK'});
+   });
+  }
+});
+
+
+});
+
 app.post('/submit', async (req,res) => {
 try {
  let url = req.body.url;
