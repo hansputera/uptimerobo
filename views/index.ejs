@@ -110,17 +110,18 @@
 
     setInterval(() => {
      let checkav = $('#verified');
-     if (checkav.data('clicked')) {
+ 
        let x = { b: $('button'), v: $('#verified') };
+
        if (x.v.checked) {
         x.b.removeAttr('disabled');
       } else {
         x.b.attr('disabled', true);
       }
-     } else {
+     
       let bt = $('button');
       $('button') = bt;
-     }
+ 
     }, 1);
 
     function showPass() {
