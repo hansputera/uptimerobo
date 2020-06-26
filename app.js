@@ -61,10 +61,9 @@ app.post('/submit', async (req,res) => {
 try {
  let url = req.body.url;
 
- 
- let vld = valid({ exact: true }).test(url);
+ let domain = ['.tk', '.cf', '.ga', '.ml', '.gq'];
 
- if (!vld) return res.redirect('/error?t=' + encodeURI('Your URL is not valid!'));
+ if (!url.startsWith('http://') || !url.startsWith('https://') || domain.includes(url)) return res.redirect('/error?t=' + encodeURI('Your URL is not valid!'));
  
  let { status } = await request.get(url);
 
