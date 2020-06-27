@@ -75,7 +75,7 @@ passport.use(new Strategy({
 }));
 
 
-passport.use(session({
+app.use(session({
 secret:'keyboard cat',
 resave: true,
 saveUninitialized: true
