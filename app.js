@@ -3,7 +3,6 @@ function checkAuth(req, res, next) {
  res.redirect('/auth/google');
 }
 
-
 const express = require('express');
 const app = express();
 
