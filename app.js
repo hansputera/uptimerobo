@@ -150,6 +150,23 @@ try {
  let url = req.body.url;
  let pwd = req.body.pwd;
  
+ const prof = require('profanities');
+ const passwordValidator = require('password-validator');
+ const schema = new passwordValidator();
+ 
+schema
+.is().min(8)                                    // Minimum length 8
+.is().max(8)                                  // Maximum length 100
+.has().uppercase()                              // Must have uppercase letters
+.has().lowercase()                              // Must have lowercase letters
+.has().digits()                                 // Must have digits
+.has().not().spaces()                           // Should not have spaces
+.is().not().oneOf(['1234567890', 'kontol']); // Blacklist these values
+
+ if (shcema.validate(pwd)) return res.send('<pre><code>*</code> Requirements Password<br /><br /><strong>1. Minimal and Maximal Password length is <code>8</code><br>2. Must have uppercase and lowercase letters.<br>3. Must have digits or numbers<br>4. Should not have spaces.<br>5. Don\'t use badwords in your password.</strong></pre>');
+
+ if (prof.includes(pwd.toLowerCase())) return res.redirect(`/error?t=${escape('Your password has badwords!')}`);
+ 
 
  let domain = valid({ strict: true, exact: true }).test(url);
 
