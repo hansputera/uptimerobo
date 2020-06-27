@@ -82,6 +82,7 @@ saveUninitialized: true
 }));
 
 app.use(passport.initialize());
+app.use(passport.session());
 
 app.get('/', async (req,res, next) => {
  db.find({}, (err, result) => {
