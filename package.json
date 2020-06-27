@@ -13,6 +13,8 @@
   "url-regex": "*",
   "passport": "*",
   "express-session": "*",
-  "passport-google-oauth2": "*"
+  "passport-google-oauth2": "*",
+  "profanities": "*",
+  "password-validator": "*"
  }
 }
