@@ -152,9 +152,9 @@ try {
  
  const prof = require('profanities');
  const passwordValidator = require('password-validator');
- const schema = new passwordValidator();
+ const schematod = new passwordValidator();
  
-schema
+schematod
 .is().min(8)                                    // Minimum length 8
 .is().max(8)                                  // Maximum length 100
 .has().uppercase()                              // Must have uppercase letters
@@ -163,7 +163,7 @@ schema
 .has().not().spaces()                           // Should not have spaces
 .is().not().oneOf(['1234567890', 'kontol']); // Blacklist these values
 
- if (shcema.validate(pwd)) return res.send('<pre><code>*</code> Requirements Password<br /><br /><strong>1. Minimal and Maximal Password length is <code>8</code><br>2. Must have uppercase and lowercase letters.<br>3. Must have digits or numbers<br>4. Should not have spaces.<br>5. Don\'t use badwords in your password.</strong></pre>');
+ if (schematod.validate(pwd)) return res.send('<pre><code>*</code> Requirements Password<br /><br /><strong>1. Minimal and Maximal Password length is <code>8</code><br>2. Must have uppercase and lowercase letters.<br>3. Must have digits or numbers<br>4. Should not have spaces.<br>5. Don\'t use badwords in your password.</strong></pre>');
 
  if (prof.includes(pwd.toLowerCase())) return res.redirect(`/error?t=${escape('Your password has badwords!')}`);
  
