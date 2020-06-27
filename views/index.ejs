@@ -37,10 +37,10 @@
     <title>Uptime Robot | Home</title>
   </head>
   <body>
-    <nav class="navbar navbar-light bg-dark">
+    <nav class="navbar navbar-light bg-light">
   <a class="navbar-brand" href="#">
-    <img src="<%= req.user ? req.user.picture : "https://i.ibb.co/j402Rsb/download-1.png" %>" width="30" height="30" class="d-inline-block align-top" alt="">
-    <%= req.user ? req.user.displayName : 'Guest' %>
+    <img src="<%= req.user ? req.user.picture : "https://i.ibb.co/j402Rsb/download-1.png" %>" width="30" height="30" class="d-inline-block align-top rounded-circle" alt="">
+    <p><%= req.user ? req.user.displayName : ' Guest' %></p>
   </a>
 </nav>
 
