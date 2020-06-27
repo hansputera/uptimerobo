@@ -40,7 +40,7 @@
     <nav class="navbar navbar-light bg-light">
   <a class="navbar-brand" href="#">
     <img src="<%= req.user ? req.user.picture : "https://i.ibb.co/j402Rsb/download-1.png" %>" width="30" height="30" class="d-inline-block align-top rounded-circle" alt="">
-    <%= req.user ? req.user.displayName : ' Guest' %>
+    <a href="<%= req.user ? "/logout": "/login" %>"><%= req.user ? req.user.displayName : ' Guest' %></a>
   </a>
 </nav>
 
@@ -66,7 +66,7 @@
     </div>
   <div class="form-group text-center">
    <label for="password">Password</label>
-   <input type="password" class="form-control" id="pwd" placeholder="Enter your password" name="pwd" maxlength=8 required>
+   <input type="password" class="form-control" id="pwd" placeholder="Enter your password" name="pwd" minlength=8 maxlength=10 required>
    <input type="checkbox" onclick="showPass()">Show
   </div>
   <div class="form-group text-center">
