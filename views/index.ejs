@@ -37,12 +37,19 @@
     <title>Uptime Robot | Home</title>
   </head>
   <body>
-    
+    <nav class="navbar navbar-light bg-dark">
+  <a class="navbar-brand" href="#">
+    <img src="<%= req.user ? req.user.picture : "https://i.ibb.co/j402Rsb/download-1.png" %>" width="30" height="30" class="d-inline-block align-top" alt="">
+    <%= req.user ? req.user.displayName : 'Guest' %>
+  </a>
+</nav>
+
+
   <div class="jumbotron text-center">
    <img class="rounded-circle" src="https://i.ibb.co/MgJYdvX/uptime-robot.png" width=250px />
    <h1> Free Uptime Robot </h1>
    <p id="title">
- Maybe this uptime will helpful for you?
+ Maybe this uptime will helpful for you?<br>
  We save <kbd><%= result.length %></kbd> websites!
 </p>
   </div>
