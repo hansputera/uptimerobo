@@ -1,3 +1,9 @@
+function checkAuth(req, res, next) {
+ if (req.isAuthenticated()) return next();
+ res.redirect('/auth/google');
+}
+
+
 const express = require('express');
 const app = express();
 
@@ -85,6 +91,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get('/', async (req,res, next) => {
+console.log(req.user);
  db.find({}, (err, result) => {
  res.render('index.ejs', { req, result});
  next();
