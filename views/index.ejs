@@ -40,7 +40,7 @@
     <nav class="navbar navbar-light bg-light">
   <a class="navbar-brand" href="#">
     <img src="<%= req.user ? req.user.picture : "https://i.ibb.co/j402Rsb/download-1.png" %>" width="30" height="30" class="d-inline-block align-top rounded-circle" alt="">
-    <p><%= req.user ? req.user.displayName : ' Guest' %></p>
+    <%= req.user ? req.user.displayName : ' Guest' %>
   </a>
 </nav>
 
@@ -83,7 +83,7 @@
 
  <footer class="text-center">
    <hr style="width: 250px;border-top: 3px solid black">
-  <p> © Created by <strong> Hanif Dwy Putra S. </strong> with ♥<br>Join to our <a href="https://discord.gg/EepS3Q9">discord</a> server's</p>
+  <p> © Created by <strong> Hanif Dwy Putra S. </strong> with ♥<br>Join to our <a href="https://zhycorp.xyz/discord">discord</a> server's</p>
  </footer>
 
     
