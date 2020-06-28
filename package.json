@@ -16,6 +16,7 @@
   "passport-google-oauth2": "*",
   "profanities": "*",
   "password-validator": "*",
-  "passport-github2":"*"
+  "passport-github2":"*",
+  "passport-discord": "*"
  }
 }
