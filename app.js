@@ -9,7 +9,9 @@ const app = express();
 const session = require('express-session');
 const passport = require('passport');
 const Strategy = require('passport-google-oauth2').Strategy;
+const secure = require('express-secure-headers');
 
+app.use(secure);
 passport.serializeUser(function(user, done) {
   done(null, user);
 });
@@ -82,8 +84,8 @@ passport.use(new Strategy({
 
 app.use(session({
 secret:'keyboard cat',
-resave: true,
-saveUninitialized: true
+resave: false,
+saveUninitialized: false
 }));
 
 app.use(passport.initialize());
@@ -196,6 +198,11 @@ schematod
  }
 });
 
+app.get('/login', (req,res) => res.redirect('/auth/google'));
+app.get('/logout', (req,res) => {
+ req.logout();
+ res.redirect('/');
+});
 
 app.get('/auth/google',
   passport.authenticate('google', { scope: 
