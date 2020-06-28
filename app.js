@@ -214,15 +214,15 @@ schematod
 
 app.get('/login', checkAuth);
 
-app.get('/logout', (req,res) => {
+app.get('/logout', checkAuth, (req,res) => {
  req.logout();
  res.redirect('/');
 });
 
-app.get('/auth/google',passport.authenticate('google', { scope:  [ 'https://www.googleapis.com/auth/plus.login',
+app.get('/auth/google',checkAuth, passport.authenticate('google', { scope:  [ 'https://www.googleapis.com/auth/plus.login',
       , 'https://www.googleapis.com/auth/plus.profile.emails.read' ]}));
 
-app.get('/auth/github', passport.authenticate('github', { scope: [ 'user:email' ] }));
+app.get('/auth/github', checkAuth, passport.authenticate('github', { scope: [ 'user:email' ] }));
 
 
 app.get('/auth/google/callback', 
