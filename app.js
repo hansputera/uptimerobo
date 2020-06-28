@@ -1,6 +1,6 @@
 function checkAuth(req, res, next) {
  if (req.isAuthenticated()) return next();
- res.redirect('/login');
+ res.redirect('/auth/google');
 }
 
 const express = require('express');
@@ -212,22 +212,17 @@ schematod
  }
 });
 
-app.get('/login', (req,res) => res.redirect('/auth/google'));
+app.get('/login', checkAuth);
+
 app.get('/logout', (req,res) => {
  req.logout();
  res.redirect('/');
 });
 
-app.get('/auth/google', (req,res) => {
-if (req.user) return res.redirect('/logout');
-passport.authenticate('google', { scope:  [ 'https://www.googleapis.com/auth/plus.login',
-      , 'https://www.googleapis.com/auth/plus.profile.emails.read' ]})
-});
+app.get('/auth/google',passport.authenticate('google', { scope:  [ 'https://www.googleapis.com/auth/plus.login',
+      , 'https://www.googleapis.com/auth/plus.profile.emails.read' ]}));
 
-app.get('/auth/github', (req,res) => {
-if (req.user) return res.redirect('/logout');
-passport.authenticate('github', { scope: [ 'user:email' ] })
-});
+app.get('/auth/github', passport.authenticate('github', { scope: [ 'user:email' ] }));
 
 
 app.get('/auth/google/callback', 
