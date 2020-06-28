@@ -2,6 +2,10 @@ function checkAuth(req, res, next) {
  if (req.isAuthenticated()) return next();
  res.redirect('/auth/google');
 }
+function checkAuthan(req, res, next) {
+ if (!req.isAuthenticated()) return next();
+ res.redirect('/logout');
+}
 
 const express = require('express');
 const app = express();
@@ -219,10 +223,10 @@ app.get('/logout', checkAuth, (req,res) => {
  res.redirect('/');
 });
 
-app.get('/auth/google',checkAuth, passport.authenticate('google', { scope:  [ 'https://www.googleapis.com/auth/plus.login',
+app.get('/auth/google',checkAuthan, passport.authenticate('google', { scope:  [ 'https://www.googleapis.com/auth/plus.login',
       , 'https://www.googleapis.com/auth/plus.profile.emails.read' ]}));
 
-app.get('/auth/github', checkAuth, passport.authenticate('github', { scope: [ 'user:email' ] }));
+app.get('/auth/github', checkAuthan, passport.authenticate('github', { scope: [ 'user:email' ] }));
 
 
 app.get('/auth/google/callback', 
