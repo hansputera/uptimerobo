@@ -211,11 +211,8 @@ app.get('/logout', (req,res) => {
  res.redirect('/');
 });
 
-app.get('/auth/google', (req,res) => {
-if (req.user) return res.json({ error: 'you can\'t login, please logout first!' });
-   passport.authenticate('google', { scope:  [ 'https://www.googleapis.com/auth/plus.login',
-      , 'https://www.googleapis.com/auth/plus.profile.emails.read' ]});
-   });
+app.get('/auth/google', passport.authenticate('google', { scope:  [ 'https://www.googleapis.com/auth/plus.login',
+      , 'https://www.googleapis.com/auth/plus.profile.emails.read' ]}));
 
 app.get('/auth/github', passport.authenticate('github', { scope: [ 'user:email' ] }));
 
