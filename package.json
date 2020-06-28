@@ -15,7 +15,6 @@
   "express-session": "*",
   "passport-google-oauth2": "*",
   "profanities": "*",
-  "password-validator": "*",
-  "express-secure-headers":"*"
+  "password-validator": "*"
  }
 }
