@@ -103,16 +103,17 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get('/', async (req,res, next) => {
+let foto;
 console.log(req.user);
 
  if (req.user) {
-   if (req.user.provider === 'google') req.user.foto = req.user.picture;
-   if (req.user.provider === 'github') req.user.foto = req.user["avatar_url"];
+   if (req.user.provider === 'google') foto = req.user.picture;
+   if (req.user.provider === 'github') foto = req.user["avatar_url"];
  }
 
 
  db.find({}, (err, result) => {
- res.render('index.ejs', { req, result});
+ res.render('index.ejs', { req, result, foto});
  next();
  })
 });
