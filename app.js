@@ -122,6 +122,10 @@ console.log(req.user);
  if (req.user) {
    if (req.user.provider === 'google') foto = req.user.picture;
    if (req.user.provider === 'github') foto = req.user._json["avatar_url"];
+   if (req.user.provider === 'discord') {
+     req.user.displayName = req.user.username + '#' + req.user.discriminator;
+     foto = `https://cdn.discordapp.com/avatars/${req.user.id}/${req.user.avatar}`;
+   }
  }
 
 
@@ -257,7 +261,7 @@ app.get('/auth/github/callback',
   });
 
 
-app.get('/auth/discord', checkAuthan, passport.authenticate('discord'));
+app.get('/auth/discord', checkAuthan, passport.authenticate('discord', { scope: stc }));
 
 app.get('/auth/discord/callback', passport.authenticate('discord', {
     failureRedirect: '/login'
