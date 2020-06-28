@@ -1,6 +1,6 @@
 function checkAuth(req, res, next) {
  if (req.isAuthenticated()) return next();
- res.redirect('/auth/google');
+ res.redirect('/login');
 }
 
 const express = require('express');
@@ -9,6 +9,7 @@ const app = express();
 const session = require('express-session');
 const passport = require('passport');
 const Strategy = require('passport-google-oauth2').Strategy;
+const StrGit = require('passport-github2').Strategy;
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -65,7 +66,15 @@ db.find({}, function (err, result) {
 }, 10 * 1000);
 
 
-
+passport.use(new StrGit({
+ clientID: '5ed94b77a52dae756a73',
+ clientSecret: '74fb3522da601cefb36756850505ebd22e963b83',
+ callbackURL: 'https://uptimeribod.herokuapp.com/auth/github/callback'
+}, function(accessToken, refreshToken, profile, done) {
+  process.nextTick(function() {
+    done(null, profile);
+  })
+ }));
 
 passport.use(new Strategy({
     clientID: '396106065900-i47son68ud1rvquc8qqgb2dmenmhlh1m.apps.googleusercontent.com',
@@ -202,17 +211,30 @@ app.get('/logout', (req,res) => {
  res.redirect('/');
 });
 
-app.get('/auth/google',
-  passport.authenticate('google', { scope: 
-      [ 'https://www.googleapis.com/auth/plus.login',
-      , 'https://www.googleapis.com/auth/plus.profile.emails.read' ] }
-));
+app.get('/auth/google', (req,res) => {
+if (req.user) return res.json({ error: 'you can\'t login, please logout first!' });
+   passport.authenticate('google', { scope:  [ 'https://www.googleapis.com/auth/plus.login',
+      , 'https://www.googleapis.com/auth/plus.profile.emails.read' ]});
+   });
+
+app.get('/auth/github', (req,res) => {
+ if (req.user) return res.json({ error: 'you can\'t login, please logout first!' });
+  passport.authenticate('github', { scope: [ 'user:email' ] });
+});
+
 
 app.get('/auth/google/callback', 
     passport.authenticate('google', { 
         successRedirect: '/',
         failureRedirect: '/auth/google'
 }));
+
+app.get('/auth/github/callback', 
+  passport.authenticate('github', { failureRedirect: '/auth/github' }),
+  function(req, res) {
+    
+    res.redirect('/');
+  });
 
 
 
