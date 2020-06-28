@@ -39,7 +39,7 @@
   <body>
     <nav class="navbar navbar-light bg-light">
   <a class="navbar-brand" href="#">
-    <img src="<%= req.user ? req.user.foto : "https://i.ibb.co/j402Rsb/download-1.png" %>" width="30" height="30" class="d-inline-block align-top rounded-circle" alt="">
+    <img src="<%= req.user ? foto : "https://i.ibb.co/j402Rsb/download-1.png" %>" width="30" height="30" class="d-inline-block align-top rounded-circle" alt="">
     <a href="<%= req.user ? "/logout": "/login" %>"><%= req.user ? req.user.displayName : ' Guest' %></a>
   </a>
 </nav>
