@@ -14,6 +14,7 @@ const session = require('express-session');
 const passport = require('passport');
 const Strategy = require('passport-google-oauth2').Strategy;
 const StrGit = require('passport-github2').Strategy;
+const StrDis = require('passport-discord').Strategy;
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -69,6 +70,18 @@ db.find({}, function (err, result) {
 
 }, 10 * 1000);
 
+let stc = ['identify', 'email', 'guilds', 'connections', 'guilds.join'];
+
+passport.use(new StrDis({
+  clientID: '705889935659630603',
+  clientSecret: 'sJa1ZbMIMj3Lca9zr6KMHrY4Zfy-cLJy',
+  callbackURL: 'https://uptimeribod.herokuapp.com/auth/discord/callback',
+  scope: stc
+}, function(accessToken, refreshToken, profile, done) {
+ process.nextTick(function() {
+  done(null, profile);
+  })
+}));
 
 passport.use(new StrGit({
  clientID: '5ed94b77a52dae756a73',
@@ -243,6 +256,14 @@ app.get('/auth/github/callback',
     res.redirect('/');
   });
 
+
+app.get('/auth/discord', checkAuthan, passport.authenticate('discord'));
+
+app.get('/auth/discord/callback', passport.authenticate('discord', {
+    failureRedirect: '/login'
+}), function(req, res) {
+    res.redirect('/');
+});
 
 
 let listener = app.listen(process.env.PORT, function () {
