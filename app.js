@@ -135,6 +135,9 @@ console.log(req.user);
  })
 });
 
+app.get('/terms', (req,res) => {
+ res.render('tos.ejs', { req });
+});
 
 app.get('/list_dom', (req,res) => {
  db.find({}, (err, result) => {
