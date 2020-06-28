@@ -217,10 +217,7 @@ if (req.user) return res.json({ error: 'you can\'t login, please logout first!' 
       , 'https://www.googleapis.com/auth/plus.profile.emails.read' ]});
    });
 
-app.get('/auth/github', (req,res) => {
- if (req.user) return res.json({ error: 'you can\'t login, please logout first!' });
-  passport.authenticate('github', { scope: [ 'user:email' ] });
-});
+app.get('/auth/github', passport.authenticate('github', { scope: [ 'user:email' ] }));
 
 
 app.get('/auth/google/callback', 
