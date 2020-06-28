@@ -1,18 +1,4 @@
 <!doctype html>
-
-<%
- if (req.user) {
- if (req.user.provider === 'google') {
-  req.user.foto = req.user.picture;
- }
-
- if (req.user.provider === 'github') {
-  req.user.foto = req.user.avatar_url;
- }
-}
-%>
-
-
 <html lang="en">
   <head>
     <!-- Required meta tags -->
