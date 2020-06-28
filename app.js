@@ -95,8 +95,8 @@ passport.use(new Strategy({
 
 app.use(session({
 secret:'keyboard cat',
-resave: false,
-saveUninitialized: false
+resave: true,
+saveUninitialized: true
 }));
 
 app.use(passport.initialize());
