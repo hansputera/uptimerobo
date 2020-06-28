@@ -104,8 +104,6 @@ console.log(req.user);
  if (req.user) {
    if (req.user.provider === 'google') req.user.foto = req.user.picture;
    else if (req.user.provider === 'github') req.user.foto = req.user["avatar_url"];
- } else {
-  req.user = { displayName: ' Guest', foto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRo3nn8itBbidC54Jd_PqLLdZanWEzg6HNpwg&usqp=CAU' };
  }
 
 
