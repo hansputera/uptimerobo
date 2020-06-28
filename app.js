@@ -219,13 +219,13 @@ app.get('/logout', (req,res) => {
 });
 
 app.get('/auth/google', (req,res) => {
-if (req.user) req.logout();
+if (req.user) return res.redirect('/logout');
 passport.authenticate('google', { scope:  [ 'https://www.googleapis.com/auth/plus.login',
       , 'https://www.googleapis.com/auth/plus.profile.emails.read' ]})
 });
 
 app.get('/auth/github', (req,res) => {
-if (req.user) req.logout();
+if (req.user) return res.redirect('/logout');
 passport.authenticate('github', { scope: [ 'user:email' ] })
 });
 
