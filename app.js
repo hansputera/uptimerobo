@@ -108,7 +108,7 @@ console.log(req.user);
 
  if (req.user) {
    if (req.user.provider === 'google') foto = req.user.picture;
-   if (req.user.provider === 'github') foto = req.user["avatar_url"];
+   if (req.user.provider === 'github') foto = req.user._json["avatar_url"];
  }
 
 
