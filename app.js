@@ -9,9 +9,7 @@ const app = express();
 const session = require('express-session');
 const passport = require('passport');
 const Strategy = require('passport-google-oauth2').Strategy;
-const secure = require('express-secure-headers');
 
-app.use(secure);
 passport.serializeUser(function(user, done) {
   done(null, user);
 });
