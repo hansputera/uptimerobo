@@ -37,7 +37,7 @@ const baseConf = {
 
 const _wafjs = new WAFJS(baseConf);
 
-express.use(async(req, res, next) => {
+const checkBot = (req, res, next) => {
 
  if(_wafjs.isBotCheck(req.headers['user-agent'])){
   res.status(403).send();
@@ -130,7 +130,7 @@ saveUninitialized: true
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/', async (req,res, next) => {
+app.get('/', checkBot, async (req,res, next) => {
 let foto;
 console.log(req.user);
 
@@ -156,7 +156,7 @@ app.get('/terms', (req,res) => {
 
 app.get('/policy', (req,res) => res.render('policy.ejs', { req }));
 
-app.get('/list_dom', (req,res) => {
+app.get('/list_dom', checkBot, (req,res) => {
  db.find({}, (err, result) => {
   if (err) {
    res.json({ error: err });
@@ -168,7 +168,7 @@ app.get('/list_dom', (req,res) => {
 });
 
 
-app.get('/error', async (req, res) => {
+app.get('/error', checkBot, async (req, res) => {
 
 let t = req.query.t;
 
@@ -179,7 +179,7 @@ res.json({ error: t });
 });
 
 
-app.get('/removeAll', async (req,res) => {
+app.get('/removeAll', checkBot, async (req,res) => {
 
 if (!req.query.pwd || req.query.pwd === '') return res.redirect('/');
 
@@ -203,7 +203,7 @@ db.find({}, async (err, result) => {
 
 });
 
-app.post('/submit', async (req,res) => {
+app.post('/submit', checkBot, async (req,res) => {
 try {
  let url = req.body.url;
  let pwd = req.body.pwd;
@@ -254,17 +254,17 @@ schematod
  }
 });
 
-app.get('/login', checkAuth);
+app.get('/login', checkBot, checkAuth);
 
-app.get('/logout', checkAuth, (req,res) => {
+app.get('/logout', checkBot, checkAuth, (req,res) => {
  req.logout();
  res.redirect('/');
 });
 
-app.get('/auth/google',checkAuthan, passport.authenticate('google', { scope:  [ 'https://www.googleapis.com/auth/plus.login',
+app.get('/auth/google', checkBot, checkAuthan, passport.authenticate('google', { scope:  [ 'https://www.googleapis.com/auth/plus.login',
       , 'https://www.googleapis.com/auth/plus.profile.emails.read' ]}));
 
-app.get('/auth/github', checkAuthan, passport.authenticate('github', { scope: [ 'user:email' ] }));
+app.get('/auth/github', checkBot, checkAuthan, passport.authenticate('github', { scope: [ 'user:email' ] }));
 
 
 app.get('/auth/google/callback', 
@@ -281,7 +281,7 @@ app.get('/auth/github/callback',
   });
 
 
-app.get('/auth/discord', checkAuthan, passport.authenticate('discord', { scope: stc }));
+app.get('/auth/discord', checkBot, checkAuthan, passport.authenticate('discord', { scope: stc }));
 
 app.get('/auth/discord/callback', passport.authenticate('discord', {
     failureRedirect: '/login'
