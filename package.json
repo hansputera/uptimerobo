@@ -18,6 +18,6 @@
   "password-validator": "*",
   "passport-github2":"*",
   "passport-discord": "*",
-  "ddos": "*"
+  "express-rate-limit": "*"
  }
 }
