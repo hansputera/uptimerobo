@@ -9,8 +9,6 @@ function checkAuthan(req, res, next) {
 
 const express = require('express');
 const app = express();
-const Ddos = require('ddos');
-const ddos = new Ddos;
 
 const session = require('express-session');
 const passport = require('passport');
@@ -38,7 +36,6 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('assets'));
-app.use(ddos.express());
 
 app.set('trust proxy', 1);
 
