@@ -28,14 +28,22 @@ const request = require('node-superfetch');
 
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-
+const rateLimit = require("express-rate-limit");
 const valid = require('url-regex');
+
+const limiter = rateLimit({
+ windowMs: 15 * 60 * 1000,
+ max: 50,
+ message: "429 Rate Limit.."
+});
+
 
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('assets'));
+app.use(limiter);
 
 app.set('trust proxy', 1);
 
