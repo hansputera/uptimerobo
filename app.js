@@ -28,23 +28,30 @@ const request = require('node-superfetch');
 
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const rateLimit = require("express-rate-limit");
+const { WAFJS } = require("wafjs");
 const valid = require('url-regex');
+const baseConf = {
+ allowedMethods: ["GET", "POST"],
+ contentTypes: ["application/json", "multipart/form-data"]
+}
 
-const limiter = rateLimit({
- windowMs: 15 * 60 * 1000,
- max: 50,
- message: "429 Rate Limit.."
+const _wafjs = new WAFJS(baseConf);
+
+express.use(async(req, res, next) => {
+
+ if(_wafjs.isBotCheck(req.headers['user-agent'])){
+  res.status(403).send();
+}
+
+ if (_wafjs.reqCheck(req.method, req.headers["content-type"])) {
+  res.status(403).send();
+ }
 });
-
-
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('assets'));
-app.use(limiter);
-
 app.set('trust proxy', 1);
 
 mongoose.connect('mongodb+srv://anak:sapi@cluster0-dwjqm.mongodb.net/urls?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
