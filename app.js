@@ -129,7 +129,7 @@ saveUninitialized: true
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/', checkBot, async (req,res, next) => {
+app.get('/', async (req,res, next) => {
 let foto;
 console.log(req.user);
 
