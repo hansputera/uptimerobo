@@ -38,7 +38,6 @@ const baseConf = {
 const _wafjs = new WAFJS(baseConf);
 
 const checkBot = (req, res, next) => {
-
  if(_wafjs.isBotCheck(req.headers['user-agent'])){
   res.status(403).send();
 }
@@ -46,7 +45,7 @@ const checkBot = (req, res, next) => {
  if (_wafjs.reqCheck(req.method, req.headers["content-type"])) {
   res.status(403).send();
  }
-});
+};
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.json());
