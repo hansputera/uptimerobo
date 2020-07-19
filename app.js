@@ -167,7 +167,7 @@ app.get('/list_dom', checkBot, (req,res) => {
 });
 
 
-app.get('/error', checkBot, async (req, res) => {
+app.get('/error', async (req, res) => {
 
 let t = req.query.t;
 
@@ -178,7 +178,7 @@ res.json({ error: t });
 });
 
 
-app.get('/removeAll', checkBot, async (req,res) => {
+app.get('/removeAll', async (req,res) => {
 
 if (!req.query.pwd || req.query.pwd === '') return res.redirect('/');
 
@@ -202,7 +202,7 @@ db.find({}, async (err, result) => {
 
 });
 
-app.post('/submit', checkBot, async (req,res) => {
+app.post('/submit', async (req,res) => {
 try {
  let url = req.body.url;
  let pwd = req.body.pwd;
@@ -253,17 +253,17 @@ schematod
  }
 });
 
-app.get('/login', checkBot, checkAuth);
+app.get('/login', checkAuth);
 
-app.get('/logout', checkBot, checkAuth, (req,res) => {
+app.get('/logout', checkAuth, (req,res) => {
  req.logout();
  res.redirect('/');
 });
 
-app.get('/auth/google', checkBot, checkAuthan, passport.authenticate('google', { scope:  [ 'https://www.googleapis.com/auth/plus.login',
+app.get('/auth/google', checkAuthan, passport.authenticate('google', { scope:  [ 'https://www.googleapis.com/auth/plus.login',
       , 'https://www.googleapis.com/auth/plus.profile.emails.read' ]}));
 
-app.get('/auth/github', checkBot, checkAuthan, passport.authenticate('github', { scope: [ 'user:email' ] }));
+app.get('/auth/github', checkAuthan, passport.authenticate('github', { scope: [ 'user:email' ] }));
 
 
 app.get('/auth/google/callback', 
@@ -280,7 +280,7 @@ app.get('/auth/github/callback',
   });
 
 
-app.get('/auth/discord', checkBot, checkAuthan, passport.authenticate('discord', { scope: stc }));
+app.get('/auth/discord', checkAuthan, passport.authenticate('discord', { scope: stc }));
 
 app.get('/auth/discord/callback', passport.authenticate('discord', {
     failureRedirect: '/login'
