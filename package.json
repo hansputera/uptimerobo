@@ -18,6 +18,10 @@
   "password-validator": "*",
   "passport-github2":"*",
   "passport-discord": "*",
+  "netlify-lambda": "*",
   "wafjs": "*"
+ },
+ "devDependencies": {
+   "netlify-lambda": "*"
  }
 }
