@@ -1,6 +1,6 @@
 function checkAuth(req, res, next) {
  if (req.isAuthenticated()) return next();
- res.redirect('/auth/google');
+ res.redirect('/auth/github');
 }
 function checkAuthan(req, res, next) {
  if (!req.isAuthenticated()) return next();
@@ -87,9 +87,9 @@ db.find({}, function (err, result) {
 let stc = ['identify', 'email', 'guilds', 'connections', 'guilds.join'];
 
 passport.use(new StrDis({
-  clientID: '705889935659630603',
-  clientSecret: 'sJa1ZbMIMj3Lca9zr6KMHrY4Zfy-cLJy',
-  callbackURL: 'https://uptimeribod.herokuapp.com/auth/discord/callback',
+  clientID: '653828182625091594',
+  clientSecret: '',
+  callbackURL: 'https://uptime.hanifdwyputra.xyz/auth/discord/callback',
   scope: stc
 }, function(accessToken, refreshToken, profile, done) {
  process.nextTick(function() {
@@ -100,24 +100,12 @@ passport.use(new StrDis({
 passport.use(new StrGit({
  clientID: '5ed94b77a52dae756a73',
  clientSecret: '74fb3522da601cefb36756850505ebd22e963b83',
- callbackURL: 'https://uptimeribod.herokuapp.com/auth/github/callback'
+ callbackURL: 'https://uptime.hanifdwyputra.xyz/auth/github/callback'
 }, function(accessToken, refreshToken, profile, done) {
   process.nextTick(function() {
     done(null, profile);
   })
  }));
-
-passport.use(new Strategy({
-    clientID: '396106065900-i47son68ud1rvquc8qqgb2dmenmhlh1m.apps.googleusercontent.com',
-    clientSecret: 'cUxAxT1TyL3wqvhyQcOHI9Fd',
-    callbackURL: "https://uptimeribod.herokuapp.com/auth/google/callback",
-    passReqToCallback   : true
-  },
-  function(request, accessToken, refreshToken, profile, done) {
-    process.nextTick(function() {
-     done(null, profile);
-   })
-}));
 
 
 app.use(session({
@@ -134,7 +122,6 @@ let foto;
 console.log(req.user);
 
  if (req.user) {
-   if (req.user.provider === 'google') foto = req.user.picture;
    if (req.user.provider === 'github') foto = req.user._json["avatar_url"];
    if (req.user.provider === 'discord') {
      req.user.displayName = req.user.username + '#' + req.user.discriminator;
@@ -194,7 +181,7 @@ db.find({}, async (err, result) => {
 
 
    db.deleteOne({ URL: tr }, (err, polres) => {
-    res.json({ anjay: 'DATA DARI PASSWORD ' + req.query.PWD + ' TERHAPUS GAN, AWOKAOWWKAOAK'});
+    res.json({ anjay: 'DATA DARI PASSWORD ' + req.query.pwd + ' TERHAPUS GAN, AWOKAOWWKAOAK'});
    });
   }
 });
@@ -260,17 +247,8 @@ app.get('/logout', checkAuth, (req,res) => {
  res.redirect('/');
 });
 
-app.get('/auth/google', checkAuthan, passport.authenticate('google', { scope:  [ 'https://www.googleapis.com/auth/plus.login',
-      , 'https://www.googleapis.com/auth/plus.profile.emails.read' ]}));
-
 app.get('/auth/github', checkAuthan, passport.authenticate('github', { scope: [ 'user:email' ] }));
 
-
-app.get('/auth/google/callback', 
-    passport.authenticate('google', { 
-        successRedirect: '/',
-        failureRedirect: '/auth/google'
-}));
 
 app.get('/auth/github/callback', 
   passport.authenticate('github', { failureRedirect: '/auth/github' }),
@@ -289,6 +267,6 @@ app.get('/auth/discord/callback', passport.authenticate('discord', {
 });
 
 
-let listener = app.listen(process.env.PORT, function () {
+let listener = app.listen(2020, function () {
  console.log(`Listening to ${listener.address().port}`);
 });
