@@ -2,9 +2,13 @@
  "name": "up",
  "version": "0.0.1",
  "description": "y",
- "scripts": { "start": "node app.js" },
- "engines": { "node": "12.x" },
- "dependencies": { 
+ "scripts": {
+  "start": "node app.js"
+ },
+ "engines": {
+  "node": "12.x"
+ },
+ "dependencies": {
   "express": "*",
   "node-superfetch": "*",
   "body-parser": "*",
@@ -16,12 +20,12 @@
   "passport-google-oauth2": "*",
   "profanities": "*",
   "password-validator": "*",
-  "passport-github2":"*",
+  "passport-github2": "*",
   "passport-discord": "*",
   "netlify-lambda": "*",
   "wafjs": "*"
  },
  "devDependencies": {
-   "netlify-lambda": "*"
+  "netlify-lambda": "*"
  }
 }
