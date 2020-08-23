@@ -77,7 +77,11 @@ db.find({}, function (err, result) {
     let track = result[i];
     request.get(track.URL).then(res => {
       console.log(`[INFO] REQUEST FOR ${track.URL}`);
-    });
+    }).catch(async e => {
+    	await db.deleteOne({ URL: track.URL }, (errorie) => {
+	 if (errorie) return console.log(errorie.stack);
+	});
+	});
   }
  }
 });
