@@ -271,6 +271,6 @@ app.get('/auth/discord/callback', passport.authenticate('discord', {
 });
 
 
-let listener = app.listen(2020, function () {
+let listener = app.listen(process.env.PORT || 2020, function () {
  console.log(`Listening to ${listener.address().port}`);
 });
