@@ -53,7 +53,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('assets'));
 app.set('trust proxy', 1);
 
-mongoose.connect('mongodb+srv://anak:sapi@cluster0-dwjqm.mongodb.net/urls?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
+mongoose.connect('REPLACE_THIS_URL_WITH_YOUR_MONGODB_URI', { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
  if (err) {
   console.log(err);
  }
@@ -91,9 +91,9 @@ db.find({}, function (err, result) {
 let stc = ['identify', 'email', 'guilds', 'connections', 'guilds.join'];
 
 passport.use(new StrDis({
-  clientID: '653828182625091594',
-  clientSecret: '',
-  callbackURL: 'https://uptime.hanifdwyputra.xyz/auth/discord/callback',
+  clientID: 'YOUR CLEINT ID',
+  clientSecret: 'YOUR CLIENT SECRET',
+  callbackURL: 'CALLBACK URL',
   scope: stc
 }, function(accessToken, refreshToken, profile, done) {
  process.nextTick(function() {
@@ -102,9 +102,9 @@ passport.use(new StrDis({
 }));
 
 passport.use(new StrGit({
- clientID: '5ed94b77a52dae756a73',
- clientSecret: '74fb3522da601cefb36756850505ebd22e963b83',
- callbackURL: 'https://uptime.hanifdwyputra.xyz/auth/github/callback'
+ clientID: 'YOUR GITHUB CLIENT ID',
+ clientSecret: 'YOUR GITHUB CLIENT SECRET',
+ callbackURL: 'CALLBACK URL'
 }, function(accessToken, refreshToken, profile, done) {
   process.nextTick(function() {
     done(null, profile);
